@@ -1,6 +1,7 @@
 ﻿@page "/reg"
 
-@using System.Text.RegularExpressions
+@using RexExApp.Models 
+@using RexExApp.Extensions 
 
 <h3>RegExPage</h3>
 
@@ -12,105 +13,47 @@
     <button class="btn btn-primary" @onclick="ValidateText">Validate</button>
 </div>
 
-@if (textValid)
+<br />
+
+@if (showMessage)
 {
-    <div>
-        <p>Congrats!!  Everything passed all the checks</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>Bad news.  We probably definitely found something.</p>
-        @foreach(var badData in ruleViolations)
-        {
-            <p>@badData.RuleType.ToString() - @badData.Pattern</p>
-        }
-    </div>
+    @if (textValid)
+    {
+        <p class="valid-text">
+            <span class="oi oi-check"></span>
+            Congrats!!  Everything passed all the checks
+        </p>
+    }
+    else
+    {
+        <div class="validation-message">
+            <p>
+                <span class="oi oi-circle-x"></span>
+                Bad news.  We probably...kind of...most definitely found something.
+            </p>
+            @foreach (var badData in ruleViolations)
+            {
+                <p>@badData.RuleType.ToString() - @badData.Pattern</p>
+            }
+        </div>
+    }
 }
 
 
 @code {
     private string inputText = string.Empty;
+    private bool showMessage = false;
     private bool textValid = true;
-
-    //https://docs.microsoft.com/en-us/dotnet/csharp/how-to/search-strings
-    //https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.split?view=net-5.0
-    //https://regexlib.com/Search.aspx?k=ssn&AspxAutoDetectCookieSupport=1
-    /*
-    SSN RegEx Patterns
-    ^\d{3}-\d{2}-\d{4}$
-    [/,,/.,/=,\s]([0-6]\d{2}|7[0-6]\d|77[0-2])(\s|\-)?(\d{2})\2(\d{4})[/,,/.,\s]
-    ^((?!000)(?!666)(?:[0-6]\d{2}|7[0-2][0-9]|73[0-3]|7[5-6][0-9]|77[0-2]))-((?!00)\d{2})-((?!0000)\d{4})$
-    */
-
-    private string regExWhiteSpaceSplit = @"\s+";
-    private string regExSplitNumbers = @"[a-z]+";
-    private List<RegExRule> regExRules = new List<RegExRule>
-    {
-        new RegExRule
-        {
-            RuleType = RuleTypes.SocialSecurityNumber,
-            Pattern = @"\d{9}",
-            Description = "Does an simple 9 digit match on SSN"
-        },
-        new RegExRule
-        {
-            RuleType = RuleTypes.SocialSecurityNumber,
-            Pattern = @"\d{3}-\d{2}-\d{4}",
-            Description = "Does an exact match using basic SSN validation in the format of NNN-NN-NNNN"
-        },
-        new RegExRule
-        {
-            RuleType = RuleTypes.SocialSecurityNumber,
-            Pattern = @"[/,,/.,/=,\s]([0-6]\d{2}|7[0-6]\d|77[0-2])(\s|\-)?(\d{2})\2(\d{4})[/,,/.,\s]",
-            Description = "Does an exact match using basic SSN validation in the format of NNN-NN-NNNN"
-        },
-        new RegExRule
-        {
-            RuleType = RuleTypes.SocialSecurityNumber,
-            Pattern = @"^((?!000)(?!666)(?:[0-6]\d{2}|7[0-2][0-9]|73[0-3]|7[5-6][0-9]|77[0-2]))-((?!00)\d{2})-((?!0000)\d{4})$",
-            Description = "Does an exact match using basic SSN validation in the format of NNN-NN-NNNN"
-        }
-    };
-
     private List<RegExRule> ruleViolations = new List<RegExRule>();
 
     private void ValidateText()
     {
-        //clear out all rules and data to start fresh
-        ruleViolations.Clear();
-
-        //split text based on pattern
-        string[] split = Regex.Split(inputText.Replace(" ", ""), regExSplitNumbers, RegexOptions.IgnoreCase);
-
-        //loop through all available regex rules to check the text matching patterns
-        foreach(var rule in regExRules)
-        {
-            if (Regex.IsMatch(inputText, rule.Pattern))
-            {
-                ruleViolations.Add(rule);
-            }
-        }
-
-        textValid = ruleViolations.Count == 0;
+        var validator = new DlpValidator(inputText);
+        validator.RunDlpRules();
+        
+        //set component properties from validator
+        textValid = validator.DataValid;
+        ruleViolations = validator.RuleViolations;
+        showMessage = true;
     }
-
-    #region Model Data
-
-    public enum RuleTypes
-    {
-        SocialSecurityNumber,
-        CreditCard,
-        MedicalCode
-    }
-
-    public class RegExRule
-    {
-        public RuleTypes RuleType { get; set; }
-        public string Pattern { get; set; }
-        public string Description { get; set; }
-    }
-
-    #endregion Model Data
 }
