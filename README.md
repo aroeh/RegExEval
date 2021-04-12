@@ -8,6 +8,18 @@ TODO: Guide users through getting your code up and running on their own system. 
 3.	Latest releases
 4.	API references
 
+# Terms
+| Acronym | Term                       | Common Format       |
+| ------- | -------------------------- | ------------------- |
+| SSN     | Social Security Number     | NNN-NN-NNNN         |
+| CCN     | Credit Card Number         | NNNN-NNNN-NNNN-NNNN |
+| RxCode  | Drug Code                  | NNNNN-NNN-NN        |
+| ABA     | UNKNOWN                    | UNKNOWN             |
+| MBI     | Medicare Benefit Indicator | UNKNOWN             |
+
+# Rules to Cover:
+
+
 # Test Data Scenarios
 SSN
 123-45-6789
