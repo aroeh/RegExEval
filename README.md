@@ -15,9 +15,7 @@ TODO: Guide users through getting your code up and running on their own system. 
 | CCN     | Credit Card Number         | NNNN-NNNN-NNNN-NNNN |
 | RxCode  | Drug Code                  | NNNNN-NNN-NN        |
 | ABA     | UNKNOWN                    | UNKNOWN             |
-| MBI     | Medicare Benefit Indicator | UNKNOWN             |
-
-# Rules to Cover:
+| MBI     | Medicare Benefit Indicator | NCNN-CNN-CCNN       |
 
 
 # Test Data Scenarios
@@ -36,6 +34,7 @@ https://docs.microsoft.com/en-us/dotnet/csharp/how-to/search-strings
 https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.split?view=net-5.0
 https://regexlib.com/Search.aspx?k=ssn&AspxAutoDetectCookieSupport=1
 https://www.regular-expressions.info/creditcard.html
+https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf
 
 SSN RegEx Patterns
 ^\d{3}-\d{2}-\d{4}$
@@ -43,7 +42,22 @@ SSN RegEx Patterns
 ^((?!000)(?!666)(?:[0-6]\d{2}|7[0-2][0-9]|73[0-3]|7[5-6][0-9]|77[0-2]))-((?!00)\d{2})-((?!0000)\d{4})$
 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+MBI
+How does the MBI look on the card?The MBI has letters and numbers. 
+Here’s an example: 1EG4-TE5-MK73
+The MBI’s 2nd, 5th, 8th, and 9th characters are always letters.
+Characters 1, 4, 7, 10, and 11 are always numbers.
+The 3rd and 6th characters are letters or numbers.
+We don’t use dashes in the MBI. They aren’t part of our computer systems and we don’t use them in file formats.
+
+Position 1 – numeric values 1 thru 9
+Position 2 – alphabetic values A thru Z (minus S, L, O, I, B, Z)
+Position 3 – alpha-numeric values 0 thru 9 and A thru Z (minus S, L, O, I, B, Z)
+Position 4 – numeric values 0 thru 9
+Position 5 – alphabetic values A thru Z (minus S, L, O, I, B, Z)
+Position 6 – alpha-numeric values 0 thru 9 and A thru Z (minus S, L, O, I, B, Z)
+Position 7 – numeric values 0 thru 9
+Position 8 – alphabetic values A thru Z (minus S, L, O, I, B, Z)
+Position 9 – alphabetic values A thru Z (minus S, L, O, I, B, Z)
+Position 10 – numeric values 0 thru 9
+Position 11 – numeric values 0 thru 9
