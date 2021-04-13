@@ -63,6 +63,30 @@ namespace RexExApp.Data
                 RuleType = RuleTypes.CreditCard,
                 Pattern = @"\b(?:\d[ -]*?){13,16}\b",
                 Description = "Finds any sequence of 13 and 16 digits including spaces or dashes"
+            },
+            new RegExRule
+            {
+                RuleType = RuleTypes.DrugCode,
+                Pattern = @"\b\d{4}-\d{4}-\d{2}|\d{5}-\d{3}-\d{2}|\d{5}-\d{4}-\d{1}|\d{5}-\*\d{3}-\d{2}\b",
+                Description = "Matches a 10 digit National Drug Code sequences of 4-4-2, 5-3-2, or 5-4-1"
+            },
+            new RegExRule
+            {
+                RuleType = RuleTypes.DrugCode,
+                Pattern = @"\b\d{4,5}-\d{3,4}-\d{1,2}\b",
+                Description = "Matches a 10 digit National Drug Code sequences of 4-4-2, 5-3-2, or 5-4-1"
+            },
+            new RegExRule
+            {
+                RuleType = RuleTypes.AbaRoutingNumber,
+                Pattern = @"\b((0[0-9])|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[0-2])|80)([0-9]{7})\b",
+                Description = "Matches a 9 digit Bank Routing Number"
+            },
+            new RegExRule
+            {
+                RuleType = RuleTypes.AbaRoutingNumber,
+                Pattern = @"\b[0-9]{7,14}\b",
+                Description = "Matches a 7-14 digit Bank Account Number"
             }
         };
     }

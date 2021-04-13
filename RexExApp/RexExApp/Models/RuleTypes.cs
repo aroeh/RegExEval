@@ -4,6 +4,9 @@
     {
         SocialSecurityNumber,
         CreditCard,
-        MedicalCode
+        MedicalCode,
+        DrugCode,
+        MedicareBenificiaryIdentifier,
+        AbaRoutingNumber
     }
 }
