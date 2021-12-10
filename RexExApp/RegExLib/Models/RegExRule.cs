@@ -1,4 +1,4 @@
-﻿namespace RexExApp.Models
+﻿namespace RegExLib.Models
 {
     public class RegExRule
     {

@@ -1,11 +1,9 @@
-﻿using RexExApp.Data;
-using RexExApp.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using RegExLib.Data;
+using RegExLib.Models;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace RexExApp.Extensions
+namespace RegExLib.Validators
 {
     public class DlpValidator
     {
@@ -15,16 +13,16 @@ namespace RexExApp.Extensions
         {
             get
             {
-                if(string.IsNullOrWhiteSpace(InputText))
+                if (string.IsNullOrWhiteSpace(InputText))
                 {
                     return null;
                 }
 
                 var split = Regex.Split(Regex.Replace(InputText.Replace("\n", ""), RegExRules.RemoveSpecialCharacters, " "), RegExRules.NumbericSplitPattern, RegexOptions.IgnoreCase);
                 var builder = new StringBuilder();
-                if(split != null && split.Length > 0)
+                if (split != null && split.Length > 0)
                 {
-                    for(int i = 0; i < split.Length; i++)
+                    for (int i = 0; i < split.Length; i++)
                     {
                         builder.Append(split[i]);
                     }

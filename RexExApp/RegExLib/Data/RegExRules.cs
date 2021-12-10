@@ -1,7 +1,6 @@
-﻿using RexExApp.Models;
-using System.Collections.Generic;
+﻿using RegExLib.Models;
 
-namespace RexExApp.Data
+namespace RegExLib.Data
 {
     public static class RegExRules
     {
