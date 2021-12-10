@@ -1,7 +1,61 @@
 ﻿@page "/"
+@page "/reg"
 
-<h1>Hello, world!</h1>
+@using RegExLib.Models
+@using RegExLib.Validators
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h3>RegExPage</h3>
+
+<p>Enter some text then click the validate button to run some regex expressions</p>
+
+<textarea @bind="inputText" rows="5" cols="100"></textarea>
+
+<div>
+    <button class="btn btn-primary" @onclick="ValidateText">Validate</button>
+</div>
+
+<br />
+
+@if (showMessage)
+{
+    @if (textValid)
+    {
+        <p class="valid-text">
+            <span class="oi oi-check"></span>
+            Congrats!!  Everything passed all the checks
+        </p>
+    }
+    else
+    {
+        <div class="validation-message">
+            <p>
+                <span class="oi oi-circle-x"></span>
+                Bad news.  We probably...kind of...most definitely found something.
+            </p>
+            @foreach (var badData in ruleViolations)
+            {
+                <p>@badData.RuleType.ToString() - @badData.Pattern</p>
+            }
+        </div>
+    }
+}
+
+
+@code {
+    private string inputText = string.Empty;
+    private bool showMessage = false;
+    private bool textValid = true;
+    private List<RegExRule> ruleViolations = new List<RegExRule>();
+
+    private void ValidateText()
+    {
+        var validator = new DlpValidator(inputText);
+        validator.RunDlpRules();
+        
+        //set component properties from validator
+        textValid = validator.DataValid;
+        ruleViolations = validator.RuleViolations;
+        showMessage = true;
+    }
+}
