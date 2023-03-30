@@ -1,0 +1,61 @@
+﻿@page "/"
+
+<PageTitle>RegExPage</PageTitle>
+
+<h1>RegExPage</h1>
+
+<p>Enter some text then click the validate button to run some regex expressions</p>
+
+<EditForm Model="@regExForm">
+    <InputTextArea rows="5" class="form-control" @bind-Value="regExForm.TextAreaInput" />
+
+    <div class="regex-form-btn">
+        <button type="button" class="btn btn-primary" @onclick="ValidateText">Validate</button>
+    </div>
+</EditForm>
+
+
+@if (showMessage)
+{
+    @if (textValid)
+    {
+        <div class="valid-text">
+            <p>
+                <span class="oi oi-check"></span>
+                Congrats!!  Everything passed all the checks
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="validation-message">
+            <p>
+                <span class="oi oi-circle-x"></span>
+                Bad news.  We probably...kind of...most definitely found something.
+            </p>
+            @foreach (var badData in ruleViolations)
+            {
+                <p>@badData.RuleType.ToString() - @badData.Pattern</p>
+            }
+        </div>
+    }
+}
+
+
+@code {
+    public RegExFormModel regExForm = new();
+    private bool showMessage = false;
+    private bool textValid = true;
+    private List<RegExRule> ruleViolations = new List<RegExRule>();
+
+    private void ValidateText()
+    {
+        var validator = new DlpValidator(regExForm.TextAreaInput);
+        validator.RunDlpRules();
+
+        //set component properties from validator
+        textValid = validator.DataValid;
+        ruleViolations = validator.RuleViolations;
+        showMessage = true;
+    }
+}

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/RexExApp/RexExApp/RexExApp.csproj",
+                "${workspaceFolder}/RegexFormDemo/RegexFormDemo.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/RexExApp/RexExApp/RexExApp.csproj",
+                "${workspaceFolder}/RegexFormDemo/RegexFormDemo.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/RexExApp/RexExApp/RexExApp.csproj",
+                "${workspaceFolder}/RegexFormDemo/RegexFormDemo.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

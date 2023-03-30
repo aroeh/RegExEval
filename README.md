@@ -9,13 +9,13 @@ TODO: Guide users through getting your code up and running on their own system. 
 4.	API references
 
 # Terms
-| Acronym | Term                       | Common Format       |
-| ------- | -------------------------- | ------------------- |
-| SSN     | Social Security Number     | NNN-NN-NNNN         |
-| CCN     | Credit Card Number         | NNNN-NNNN-NNNN-NNNN |
-| RxCode  | Drug Code                  | NNNNN-NNN-NN        |
-| ABA     | UNKNOWN                    | UNKNOWN             |
-| MBI     | Medicare Benefit Indicator | NCNN-CNN-CCNN       |
+| Acronym | Term                                    | Common Format       |
+| ------- | --------------------------------------- | ------------------- |
+| SSN     | Social Security Number                  | NNN-NN-NNNN         |
+| CCN     | Credit Card Number                      | NNNN-NNNN-NNNN-NNNN |
+| RxCode  | Drug Code                               | NNNNN-NNN-NN        |
+| ABA     | American Bank Assocation Routing Number | NNNNNNNNN           |
+| MBI     | Medicare Benefit Indicator              | NCNN-CNN-CCNN       |
 
 
 # Test Data Scenarios
