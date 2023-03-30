@@ -102,4 +102,5 @@ Position 10 – numeric values 0 thru 9
 Position 11 – numeric values 0 thru 9
 
 # References
-[Debug BlazorWasm](https://learn.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-7.0&tabs=visual-studio-code)
+- [Blzaor Samples](https://github.com/dotnet/blazor-samples)
+- [Debug BlazorWasm](https://learn.microsoft.com/en-us/aspnet/core/blazor/debug?view=aspnetcore-7.0&tabs=visual-studio-code)
